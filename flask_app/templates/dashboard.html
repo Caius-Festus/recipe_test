@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Welcome!</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome {{ session["first_name"] }}!</h1>
+        <div class="header_links">
+            <a href="/recipes/new">Create</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </header>
+    <h3>Created Recipes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Under 30 minutes?</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in created_recipes %}
+                <tr id="take">
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.under_thirty }}</td>
+                    <td>
+                        <a href="/recipes/{{recipe.id}}">view instructions</a>
+                        <a href="/recipes/edit/{{recipe.id}}">edit</a>
+                        <a href="">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
